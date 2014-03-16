@@ -16,16 +16,16 @@ def conway
 		end
 	end
 	Curses.curs_set(0)
+
 	100.times do
 		system "clear" or system "cls"
-		for i in 0..new_grid.x-1 
-			new_grid.cell_array.each do |val|
-				if val.x == i
-					print val.state + ' '
-				end
+		new_grid.cell_array.each_with_index do |val, ind|
+			if ind % grid_x == 0 && ind != 0
+				print "\n"
 			end
-			print "\n"
+			print val.state + ' '
 		end
+
 
 		new_grid.play_god
 		new_grid.next_gen
