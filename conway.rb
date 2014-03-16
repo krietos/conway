@@ -4,7 +4,9 @@ require('./lib/cell.rb')
 
 def conway
 
-	new_grid = Grid.new(50, 50)
+	grid_x = 50
+	grid_y = 50
+	new_grid = Grid.new(grid_x, grid_y)
 	prng = Random.new
 	new_grid.cell_array.each do |val|
 		if prng.rand(0..1) == 0
@@ -26,7 +28,7 @@ def conway
 
 		new_grid.play_god
 		new_grid.next_gen
-		sleep (1/3)
+		sleep (1)
 	end
 end
 

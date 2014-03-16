@@ -38,6 +38,11 @@ describe Grid do
       test_array = test_grid.neighbor(test_grid.cell_array[4])
       test_array.length.should(eq(8))
     end
+    it("should return an array of all the neighboring cells") do
+      test_grid = Grid.new(50, 50)
+      test_array = test_grid.neighbor(test_grid.cell_array[55])
+      test_array.length.should(eq(8))
+    end
   end
   describe("live_count") do
     it "should return a value of how many cells are alive around it" do

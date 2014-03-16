@@ -10,25 +10,26 @@ class Grid
         @cell_array << new_cell
       end
     end
+    @cell_array.each do |val|
+      neighbor(val)
+    end
   end
 
   def neighbor(pcell)
-    @neighbors = []
     @cell_array.each do |cell|
       for i in (pcell.x-1)..(pcell.x+1)
         for j in (pcell.y-1)..(pcell.y+1)
           if (cell.x == i && cell.y == j) && pcell != cell
-            @neighbors << cell
+            pcell.neighbors << cell
           end
         end
       end
     end
-    @neighbors
   end
 
   def live_count(cell)
     live_count = 0
-    neighbor(cell).each do |cell|
+    cell.neighbors.each do |cell|
       if cell.state == '.'
         live_count += 1
       end
@@ -38,14 +39,15 @@ class Grid
 
   def play_god
     @cell_array.each do |val|
+      lives = live_count(val)
       if val.state == "."
-        if live_count(val) < 2 || live_count(val) > 3
+        if lives < 2 || lives > 3
           val.murder
         else
           val.res
         end
       elsif val.state == " "
-        if live_count(val) == 3
+        if lives == 3
           val.res
         else
           val.murder
