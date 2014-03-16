@@ -1,5 +1,6 @@
 require('./lib/grid.rb')
 require('./lib/cell.rb')
+require('curses')
  
 
 def conway
@@ -14,7 +15,7 @@ def conway
 			val.pending = '.'
 		end
 	end
-
+	Curses.curs_set(0)
 	100.times do
 		system "clear" or system "cls"
 		for i in 0..new_grid.x-1 
