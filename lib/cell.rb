@@ -1,10 +1,8 @@
 class Cell
-  attr_reader(:x, :y)
+
   attr_accessor(:state, :pending, :neighbors)
-  def initialize(state, x, y)
+  def initialize(state)
     @state = state
-    @x = x
-    @y = y
     @pending = ' '
     @neighbors = []
   end

@@ -2,7 +2,6 @@ require('./lib/grid.rb')
 require('./lib/cell.rb')
 require('curses')
  
-
 def conway
 
 	grid_x = 50
@@ -26,7 +25,6 @@ def conway
 			print val.state + ' '
 		end
 
-
 		new_grid.play_god
 		new_grid.next_gen
 		sleep (1)
@@ -34,4 +32,3 @@ def conway
 end
 
 conway
-
