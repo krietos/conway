@@ -13,57 +13,93 @@ class Grid
 
   def neighbor(grid_x, grid_y)
     @cell_array.each_with_index do |cell, ind|
-      if ind == 0 #top left
-        cell.neighbors << @cell_array[ind + 1]
-        cell.neighbors << @cell_array[ind + grid_x]
-        cell.neighbors << @cell_array[ind + grid_x + 1]
-      elsif ind == (grid_x - 1) #top right
-        cell.neighbors << @cell_array[ind - 1]
-        cell.neighbors << @cell_array[ind + grid_x]
-        cell.neighbors << @cell_array[ind + grid_x - 1]
-      elsif ind == (grid_x * grid_y - grid_x) # bottom left
-        cell.neighbors << @cell_array[ind - grid_x]
-        cell.neighbors << @cell_array[ind - grid_x + 1]
-        cell.neighbors << @cell_array[ind + 1]
-      elsif ind == (grid_x * grid_y - 1) # bottom right
-        cell.neighbors << @cell_array[ind - grid_x]
-        cell.neighbors << @cell_array[ind - grid_x - 1]
-        cell.neighbors << @cell_array[ind - 1]
-      elsif ind < grid_x #top
-        cell.neighbors << @cell_array[ind + 1]
-        cell.neighbors << @cell_array[ind - 1]
-        cell.neighbors << @cell_array[ind + grid_x - 1]
-        cell.neighbors << @cell_array[ind + grid_x]
-        cell.neighbors << @cell_array[ind + grid_x + 1]
-      elsif ind % grid_x == 0 # left
-        cell.neighbors << @cell_array[ind + grid_x]
-        cell.neighbors << @cell_array[ind - grid_x]
-        cell.neighbors << @cell_array[ind + 1]
-        cell.neighbors << @cell_array[ind + grid_x + 1]
-        cell.neighbors << @cell_array[ind - grid_x + 1]
-      elsif ind % grid_x == grid_x - 1 # right
-        cell.neighbors << @cell_array[ind + grid_x]
-        cell.neighbors << @cell_array[ind - grid_x]
-        cell.neighbors << @cell_array[ind - 1]
-        cell.neighbors << @cell_array[ind + grid_x - 1]
-        cell.neighbors << @cell_array[ind - grid_x - 1]
-      elsif ind > (grid_x * grid_y - grid_x) # bottom
-        cell.neighbors << @cell_array[ind + 1]
-        cell.neighbors << @cell_array[ind - 1]
-        cell.neighbors << @cell_array[ind - grid_x]
-        cell.neighbors << @cell_array[ind - grid_x + 1]
-        cell.neighbors << @cell_array[ind - grid_x - 1]
-      else # middle
-        cell.neighbors << @cell_array[ind + 1]
-        cell.neighbors << @cell_array[ind - 1]
-        cell.neighbors << @cell_array[ind - grid_x]
-        cell.neighbors << @cell_array[ind + grid_x]
-        cell.neighbors << @cell_array[ind + grid_x + 1]
-        cell.neighbors << @cell_array[ind + grid_x - 1]
-        cell.neighbors << @cell_array[ind - grid_x - 1]
-        cell.neighbors << @cell_array[ind - grid_x + 1]
+      if ind == 0
+        is_top_left(cell, ind, grid_x)
+      elsif ind == (grid_x - 1)
+        is_top_right(cell, ind, grid_x)
+      elsif ind == (grid_x * grid_y - grid_x)
+        is_bottom_left(cell, ind, grid_x)
+      elsif ind == (grid_x * grid_y - 1)
+        is_bottom_right(cell, ind, grid_x)
+      elsif ind < grid_x 
+        is_top(cell, ind, grid_x)
+      elsif ind % grid_x == 0
+        is_left(cell, ind, grid_x)
+      elsif ind % grid_x == grid_x - 1
+        is_right(cell, ind, grid_x)
+      elsif ind > (grid_x * grid_y - grid_x)
+        is_bottom(cell, ind, grid_x)
+      else
+        is_middle(cell, ind, grid_x)
       end
     end
+  end
+
+  def is_top_left(cell, ind, grid_x)
+    cell.neighbors << @cell_array[ind + 1]
+    cell.neighbors << @cell_array[ind + grid_x]
+    cell.neighbors << @cell_array[ind + grid_x + 1]
+  end
+
+  def is_top_right(cell, ind, grid_x)
+    cell.neighbors << @cell_array[ind - 1]
+    cell.neighbors << @cell_array[ind + grid_x]
+    cell.neighbors << @cell_array[ind + grid_x - 1]
+  end
+
+  def is_bottom_left(cell, ind, grid_x)
+    cell.neighbors << @cell_array[ind - grid_x]
+    cell.neighbors << @cell_array[ind - grid_x + 1]
+    cell.neighbors << @cell_array[ind + 1]
+  end
+
+  def is_bottom_right(cell, ind, grid_x)
+    cell.neighbors << @cell_array[ind - grid_x]
+    cell.neighbors << @cell_array[ind - grid_x - 1]
+    cell.neighbors << @cell_array[ind - 1]
+  end
+
+  def is_top(cell, ind, grid_x)
+    cell.neighbors << @cell_array[ind + 1]
+    cell.neighbors << @cell_array[ind - 1]
+    cell.neighbors << @cell_array[ind + grid_x - 1]
+    cell.neighbors << @cell_array[ind + grid_x]
+    cell.neighbors << @cell_array[ind + grid_x + 1]
+  end
+
+  def is_left(cell, ind, grid_x)
+    cell.neighbors << @cell_array[ind + grid_x]
+    cell.neighbors << @cell_array[ind - grid_x]
+    cell.neighbors << @cell_array[ind + 1]
+    cell.neighbors << @cell_array[ind + grid_x + 1]
+    cell.neighbors << @cell_array[ind - grid_x + 1]
+  end
+
+  def is_right(cell, ind, grid_x)
+    cell.neighbors << @cell_array[ind + grid_x]
+    cell.neighbors << @cell_array[ind - grid_x]
+    cell.neighbors << @cell_array[ind - 1]
+    cell.neighbors << @cell_array[ind + grid_x - 1]
+    cell.neighbors << @cell_array[ind - grid_x - 1]
+  end
+
+  def is_bottom(cell, ind, grid_x)
+    cell.neighbors << @cell_array[ind + 1]
+    cell.neighbors << @cell_array[ind - 1]
+    cell.neighbors << @cell_array[ind - grid_x]
+    cell.neighbors << @cell_array[ind - grid_x + 1]
+    cell.neighbors << @cell_array[ind - grid_x - 1]
+  end
+
+  def is_middle(cell, ind, grid_x)
+    cell.neighbors << @cell_array[ind + 1]
+    cell.neighbors << @cell_array[ind - 1]
+    cell.neighbors << @cell_array[ind - grid_x]
+    cell.neighbors << @cell_array[ind + grid_x]
+    cell.neighbors << @cell_array[ind + grid_x + 1]
+    cell.neighbors << @cell_array[ind + grid_x - 1]
+    cell.neighbors << @cell_array[ind - grid_x - 1]
+    cell.neighbors << @cell_array[ind - grid_x + 1]
   end
 
   def live_count(cell)

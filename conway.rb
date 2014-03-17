@@ -4,7 +4,7 @@ require('curses')
  
 def conway
 
-	grid_x = 50
+	grid_x = 100
 	grid_y = 50
 	new_grid = Grid.new(grid_x, grid_y)
 	prng = Random.new
