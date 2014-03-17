@@ -17,14 +17,7 @@ def conway
 	Curses.curs_set(0)
 
 	100.times do
-		system "clear" or system "cls"
-		new_grid.cell_array.each_with_index do |val, ind|
-			if ind % grid_x == 0 && ind != 0
-				print "\n"
-			end
-			print val.state + ' '
-		end
-
+		new_grid.output(grid_x)
 		new_grid.play_god
 		new_grid.next_gen
 		sleep (1)

@@ -4,7 +4,7 @@ class Grid
     @y = y
     @x = x
     @cell_array = []
-    (x * y).times do |x|
+    (x * y).times do
       new_cell = Cell.new(' ')
       @cell_array << new_cell
     end
@@ -134,6 +134,16 @@ class Grid
   def next_gen
     @cell_array.each do | cell |
       cell.state = cell.pending
+    end
+  end
+
+  def output(grid_x)
+    system "clear" or system "cls"
+    @cell_array.each_with_index do |val, ind|
+      if ind % grid_x == 0 && ind != 0
+        print "\n"
+      end
+      print val.state + ' '
     end
   end
 end
