@@ -4,7 +4,7 @@ require 'grid'
 
 describe Cell do
   it 'it is an instance of Cell' do
-    test_cell = Cell.new(" ", 1, 2)
+    test_cell = Cell.new(" ")
     test_cell.should be_an_instance_of Cell
   end
   describe('res') do
